@@ -19,8 +19,8 @@ global.gurl = process.env.GURL || "https://whatsapp.com/channel/0029Vark1I1AYlUR
 global.website = process.env.GURL || "https://whatsapp.com/channel/0029Vark1I1AYlUR1G8YMX31";
 global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/vci8Frt.jpeg";
 global.devs = "https://wa.me/237659079843 , https://wa.me/237690768603";
-global.sudo = process.env.SUDO || "237659079843";
-global.owner = process.env.OWNER_NUMBER || "PUT YOUR OWNER NUMBER";
+global.sudo = process.env.SUDO || "22665653323";
+global.owner = process.env.OWNER_NUMBER || "22665653323";
 global.style = process.env.STYLE || "3";
 global.gdbye = process.env.GOODBYE || "false";
 global.wlcm = process.env.WELCOME || "false";
@@ -32,7 +32,7 @@ global.userImages = process.env.USER_IMAGES || "https://i.imgur.com/vci8Frt.jpeg
 global.waPresence = process.env.WAPRESENCE || "available";
 global.readcmds = process.env.READ_COMMAND || "true";
 global.readmessage = process.env.READ_MESSAGE || "false";
-global.readmessagefrom = process.env.READ_MESSAGE_FROM || "";
+global.readmessagefrom = process.env.READ_MESSAGE_FROM || "true";
 global.read_status = process.env.AUTO_READ_STATUS || "true";
 global.save_status = process.env.AUTO_SAVE_STATUS || "false";
 global.save_status_from = process.env.SAVE_STATUS_FROM || "";
@@ -43,9 +43,51 @@ global.scan = "https://kata-session.onrender.com";
 
 global.SESSION_ID =
   process.env.SESSION_ID ||
-  "PUT YOUR SESSION HERE"
+  "name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 */6 * * *'  # Relance toutes les 6 heures
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Install FFmpeg
+      run: sudo apt-get install -y ffmpeg
+
+    - name: Start application with timeout
+      run: |
+        timeout 21590s npm start  # Limite l'exécution à 5h 59m 50s
+
+    - name: Save state (Optional)
+      run: |
+        ./save_state.sh"
 module.exports = {
-  menu: process.env.MENU || "1",
+  menu: process.env.MENU || ".",
   HANDLERS: process.env.PREFIX || ".",
   BRANCH: process.env.BRANCH || "main",
   VERSION: process.env.VERSION || "1.0.0",
